@@ -1,0 +1,1 @@
+# sync-postgres-with-elasticsearch-example
