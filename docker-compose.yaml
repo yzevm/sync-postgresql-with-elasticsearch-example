@@ -4,15 +4,15 @@ services:
     image: debezium/zookeeper:1.0
     restart: always
     ports:
-      - 2181:2181
-      - 2888:2888
-      - 3888:3888
+      - "2181:2181"
+      - "2888:2888"
+      - "3888:3888"
 
   kafka:
     image: debezium/kafka:1.0
     restart: always
     ports:
-      - 9092:9092
+      - "9092:9092"
     links:
       - zookeeper
     environment:
@@ -22,29 +22,40 @@ services:
     build: ./postgres
     restart: always
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DATABASE=test_db
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.6.2
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.8.5
     restart: always
     ports:
-      - 9200:9200
+      - "9200:9200"
+    expose: 
+      - "9200"  
     environment:
-      - http.host=0.0.0.0
-      - transport.host=127.0.0.1
-      - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+      discovery.type: "single-node"
+      cluster.routing.allocation.disk.threshold_enabled: "false"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:6.8.5
+    restart: always
+    links:
+      - elasticsearch
+    ports:
+      - "5601:5601"
 
   connect:
     build: ./debezium-jdbc-es
     restart: always
     ports:
-      - 8083:8083
-      - 5005:5005
+      - "8083:8083"
+      - "5005:5005"
     links:
       - kafka
       - postgres
