@@ -21,7 +21,6 @@ RUN mkdir $KAFKA_CONNECT_ES_DIR && cd $KAFKA_CONNECT_ES_DIR &&\
         curl -sO https://repo.maven.apache.org/org/apache/httpcomponents/httpcore-nio/4.4.4/httpcore-nio-4.4.4.jar && \
         curl -sO https://repo.maven.apache.org/org/apache/httpcomponents/httpclient/4.5.1/httpclient-4.5.1.jar && \
         curl -sO https://repo.maven.apache.org/org/apache/httpcomponents/httpasyncclient/4.1.1/httpasyncclient-4.1.1.jar && \
-        curl -sO https://repo.maven.apache.org/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4.jar && \
         curl -sO https://repo.maven.apache.org/commons-logging/commons-logging/1.2/commons-logging-1.2.jar && \
         curl -sO https://repo.maven.apache.org/commons-codec/commons-codec/1.9/commons-codec-1.9.jar && \
         curl -sO https://repo.maven.apache.org/org/apache/httpcomponents/httpcore/4.4.4/httpcore-4.4.4.jar && \
